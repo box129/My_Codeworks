@@ -1,0 +1,42 @@
+body{
+    background-color: #393E46;
+}
+.container{
+    height: 99vh;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px;
+}
+h1 {
+    margin: 1px;
+    font-family: 'Lobster', cursive;
+    text-shadow: 5px 0 #232931;
+    font-size: 5rem;
+    color: #4ECCA3;
+}
+.text{
+    text-align: center;
+    /* grid-column: span 2; */
+    grid-column: 2/4;
+    grid-row: 1;
+}
+.dicebox{
+    font-family: 'Indie Flower', cursive;
+    grid-row: 2;
+}
+.P1{
+    color: #4ECCA3;
+    grid-column-start: 2;
+}
+.P2{
+    color: #4ECCA3;
+    grid-column-start: 3;
+}
+footer{
+    grid-column: 2/4;
+    grid-row: 3;
+    font-family: 'Indie Flower', cursive;
+    color: #EEEEEE
+}
