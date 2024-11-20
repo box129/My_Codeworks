@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TradingBotService.APIs;
 using TradingBotService.APIs.Common;
@@ -21,6 +22,7 @@ public abstract class AdminControlsControllerBase : ControllerBase
     /// Create one AdminControl
     /// </summary>
     [HttpPost()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<AdminControl>> CreateAdminControl(AdminControlCreateInput input)
     {
         var adminControl = await _service.CreateAdminControl(input);
@@ -32,6 +34,7 @@ public abstract class AdminControlsControllerBase : ControllerBase
     /// Delete one AdminControl
     /// </summary>
     [HttpDelete("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> DeleteAdminControl(
         [FromRoute()] AdminControlWhereUniqueInput uniqueId
     )
@@ -52,6 +55,7 @@ public abstract class AdminControlsControllerBase : ControllerBase
     /// Find many AdminControls
     /// </summary>
     [HttpGet()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<List<AdminControl>>> AdminControls(
         [FromQuery()] AdminControlFindManyArgs filter
     )
@@ -74,6 +78,7 @@ public abstract class AdminControlsControllerBase : ControllerBase
     /// Get one AdminControl
     /// </summary>
     [HttpGet("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<AdminControl>> AdminControl(
         [FromRoute()] AdminControlWhereUniqueInput uniqueId
     )
@@ -92,6 +97,7 @@ public abstract class AdminControlsControllerBase : ControllerBase
     /// Update one AdminControl
     /// </summary>
     [HttpPatch("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> UpdateAdminControl(
         [FromRoute()] AdminControlWhereUniqueInput uniqueId,
         [FromQuery()] AdminControlUpdateInput adminControlUpdateDto

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TradingBotService.APIs;
 using TradingBotService.APIs.Common;
@@ -21,6 +22,7 @@ public abstract class SubscriptionsControllerBase : ControllerBase
     /// Create one Subscription
     /// </summary>
     [HttpPost()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<Subscription>> CreateSubscription(SubscriptionCreateInput input)
     {
         var subscription = await _service.CreateSubscription(input);
@@ -32,6 +34,7 @@ public abstract class SubscriptionsControllerBase : ControllerBase
     /// Delete one Subscription
     /// </summary>
     [HttpDelete("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> DeleteSubscription(
         [FromRoute()] SubscriptionWhereUniqueInput uniqueId
     )
@@ -52,6 +55,7 @@ public abstract class SubscriptionsControllerBase : ControllerBase
     /// Find many Subscriptions
     /// </summary>
     [HttpGet()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<List<Subscription>>> Subscriptions(
         [FromQuery()] SubscriptionFindManyArgs filter
     )
@@ -74,6 +78,7 @@ public abstract class SubscriptionsControllerBase : ControllerBase
     /// Get one Subscription
     /// </summary>
     [HttpGet("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<Subscription>> Subscription(
         [FromRoute()] SubscriptionWhereUniqueInput uniqueId
     )
@@ -92,6 +97,7 @@ public abstract class SubscriptionsControllerBase : ControllerBase
     /// Update one Subscription
     /// </summary>
     [HttpPatch("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> UpdateSubscription(
         [FromRoute()] SubscriptionWhereUniqueInput uniqueId,
         [FromQuery()] SubscriptionUpdateInput subscriptionUpdateDto

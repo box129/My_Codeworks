@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TradingBotService.APIs;
 using TradingBotService.APIs.Common;
@@ -21,6 +22,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Create one User
     /// </summary>
     [HttpPost()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<User>> CreateUser(UserCreateInput input)
     {
         var user = await _service.CreateUser(input);
@@ -32,6 +34,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Delete one User
     /// </summary>
     [HttpDelete("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> DeleteUser([FromRoute()] UserWhereUniqueInput uniqueId)
     {
         try
@@ -50,6 +53,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Find many Users
     /// </summary>
     [HttpGet()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<List<User>>> Users([FromQuery()] UserFindManyArgs filter)
     {
         return Ok(await _service.Users(filter));
@@ -68,6 +72,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Get one User
     /// </summary>
     [HttpGet("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<User>> User([FromRoute()] UserWhereUniqueInput uniqueId)
     {
         try
@@ -84,6 +89,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Update one User
     /// </summary>
     [HttpPatch("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> UpdateUser(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromQuery()] UserUpdateInput userUpdateDto
@@ -105,6 +111,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Connect multiple Subscriptions records to User
     /// </summary>
     [HttpPost("{Id}/subscriptions")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> ConnectSubscriptions(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromQuery()] SubscriptionWhereUniqueInput[] subscriptionsId
@@ -126,6 +133,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Disconnect multiple Subscriptions records from User
     /// </summary>
     [HttpDelete("{Id}/subscriptions")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> DisconnectSubscriptions(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromBody()] SubscriptionWhereUniqueInput[] subscriptionsId
@@ -147,6 +155,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Find multiple Subscriptions records for User
     /// </summary>
     [HttpGet("{Id}/subscriptions")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<List<Subscription>>> FindSubscriptions(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromQuery()] SubscriptionFindManyArgs filter
@@ -166,6 +175,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Update multiple Subscriptions records for User
     /// </summary>
     [HttpPatch("{Id}/subscriptions")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> UpdateSubscriptions(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromBody()] SubscriptionWhereUniqueInput[] subscriptionsId
@@ -187,6 +197,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Connect multiple TradeActivities records to User
     /// </summary>
     [HttpPost("{Id}/tradeActivities")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> ConnectTradeActivities(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromQuery()] TradeActivityWhereUniqueInput[] tradeActivitiesId
@@ -208,6 +219,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Disconnect multiple TradeActivities records from User
     /// </summary>
     [HttpDelete("{Id}/tradeActivities")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> DisconnectTradeActivities(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromBody()] TradeActivityWhereUniqueInput[] tradeActivitiesId
@@ -229,6 +241,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Find multiple TradeActivities records for User
     /// </summary>
     [HttpGet("{Id}/tradeActivities")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<List<TradeActivity>>> FindTradeActivities(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromQuery()] TradeActivityFindManyArgs filter
@@ -248,6 +261,7 @@ public abstract class UsersControllerBase : ControllerBase
     /// Update multiple TradeActivities records for User
     /// </summary>
     [HttpPatch("{Id}/tradeActivities")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> UpdateTradeActivities(
         [FromRoute()] UserWhereUniqueInput uniqueId,
         [FromBody()] TradeActivityWhereUniqueInput[] tradeActivitiesId

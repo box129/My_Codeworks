@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TradingBotService.APIs;
 using TradingBotService.APIs.Common;
@@ -21,6 +22,7 @@ public abstract class TradeActivitiesControllerBase : ControllerBase
     /// Create one TradeActivity
     /// </summary>
     [HttpPost()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<TradeActivity>> CreateTradeActivity(
         TradeActivityCreateInput input
     )
@@ -34,6 +36,7 @@ public abstract class TradeActivitiesControllerBase : ControllerBase
     /// Delete one TradeActivity
     /// </summary>
     [HttpDelete("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> DeleteTradeActivity(
         [FromRoute()] TradeActivityWhereUniqueInput uniqueId
     )
@@ -54,6 +57,7 @@ public abstract class TradeActivitiesControllerBase : ControllerBase
     /// Find many TradeActivities
     /// </summary>
     [HttpGet()]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<List<TradeActivity>>> TradeActivities(
         [FromQuery()] TradeActivityFindManyArgs filter
     )
@@ -76,6 +80,7 @@ public abstract class TradeActivitiesControllerBase : ControllerBase
     /// Get one TradeActivity
     /// </summary>
     [HttpGet("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult<TradeActivity>> TradeActivity(
         [FromRoute()] TradeActivityWhereUniqueInput uniqueId
     )
@@ -94,6 +99,7 @@ public abstract class TradeActivitiesControllerBase : ControllerBase
     /// Update one TradeActivity
     /// </summary>
     [HttpPatch("{Id}")]
+    [Authorize(Roles = "user")]
     public async Task<ActionResult> UpdateTradeActivity(
         [FromRoute()] TradeActivityWhereUniqueInput uniqueId,
         [FromQuery()] TradeActivityUpdateInput tradeActivityUpdateDto

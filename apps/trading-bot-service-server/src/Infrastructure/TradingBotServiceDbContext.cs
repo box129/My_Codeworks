@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TradingBotService.Infrastructure.Models;
 
 namespace TradingBotService.Infrastructure;
 
-public class TradingBotServiceDbContext : DbContext
+public class TradingBotServiceDbContext : IdentityDbContext<IdentityUser>
 {
     public TradingBotServiceDbContext(DbContextOptions<TradingBotServiceDbContext> options)
         : base(options) { }
